@@ -1,0 +1,153 @@
+*, *::after,*::before{
+    box-sizing: border-box;
+
+  };
+body{
+
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+
+}
+
+
+h1,h2,h3,h4,h6,p {
+    margin: 0;
+}
+
+// Variables
+
+$mainPad: 4vh;
+$a4: 297/210;
+$size:100vh ;
+
+// Header
+
+header{
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    height: $mainPad;
+    width:100%;
+    align-items: center;
+}
+
+// Main Content
+.main-content{
+
+
+    width: $a4*$size;
+    height: $size;
+    margin: 0 auto;
+    padding: $mainPad 0;
+}
+.wrapper{
+    display:grid;
+    height: 100%;
+    width:100%;
+    grid-template-columns: 1fr 1fr  1.4fr 2fr;
+    grid-template-rows: 1.4fr 1.4fr 0.5fr  0.5fr 1fr;
+
+
+    grid-gap: 5px 5px;
+    grid-template-areas:
+        'info stats      counters       counters '
+        'info advantages armor         buffs   '
+        'info advantages mainHand         buffs    '
+        'info advantages mainHand         inventory    '
+        'info advantages offHand         inventory    ';
+
+    .grid__cell{
+        border: 1px dashed black;
+    }
+}
+
+.info{
+    grid-area: info;
+    .img__box{
+
+        max-width: 200px;
+        padding: 5px 10px 5px;
+    }
+    img{
+        object-fit: contain;
+        width:100%;
+    }
+    .name{
+        text-align: center;
+        padding: 3px;
+    }
+    span{
+        display: block;
+        border-bottom: 2px solid darkslategray;
+        margin: 0 8px 0;
+        padding-bottom: 5px;
+    &:last-child{
+        border-bottom: none;
+    }
+    }
+
+}
+.stats{
+    grid-area: stats;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 2px;
+    .stat{
+
+    }
+
+
+}
+.counters{
+    grid-area: counters;
+    padding: 10px;
+
+    .counter{
+
+        display: flex;
+        flex-direction: row;
+        width:100%;
+        justify-content: flex-start;
+        font-size: 16px;
+
+        height: 50%;
+        padding:5px;
+
+        &__item{
+            flex-grow: 1;
+            padding:2px;
+        }
+        &--title{
+            flex-grow: 0;
+        }
+    }
+
+}
+.armor{
+    grid-area: armor;
+}
+.advantages{
+    grid-area: advantages;
+}
+.disadvantages{
+    grid-area: disadvantages;
+}
+.mainHand{
+    grid-area: mainHand;
+}
+.offHand{
+    grid-area: offHand;
+}
+.buffs{
+    grid-area: buffs;
+}
+.actions{
+    grid-area: actions;
+}
+.inventory{
+    grid-area: inventory;
+}

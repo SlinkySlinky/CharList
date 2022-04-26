@@ -1,0 +1,186 @@
+*, *::after, *::before {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h6, p {
+  margin: 0;
+}
+
+header {
+  position: fixed;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  top: 0;
+  left: 0;
+  height: 4vh;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main-content {
+  width: 141.42857vh;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 4vh 0;
+}
+
+.wrapper {
+  display: -ms-grid;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  -ms-grid-columns: 1fr 1fr  1.4fr 2fr;
+      grid-template-columns: 1fr 1fr  1.4fr 2fr;
+  -ms-grid-rows: 1.4fr 1.4fr 0.5fr  0.5fr 1fr;
+      grid-template-rows: 1.4fr 1.4fr 0.5fr  0.5fr 1fr;
+  grid-gap: 5px 5px;
+      grid-template-areas: 'info stats      counters       counters ' 'info advantages armor         buffs   ' 'info advantages mainHand         buffs    ' 'info advantages mainHand         inventory    ' 'info advantages offHand         inventory    ';
+}
+
+.wrapper .grid__cell {
+  border: 1px dashed black;
+}
+
+.info {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 5;
+  -ms-grid-column: 1;
+  grid-area: info;
+}
+
+.info .img__box {
+  max-width: 200px;
+  padding: 5px 10px 5px;
+}
+
+.info img {
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 100%;
+}
+
+.info .name {
+  text-align: center;
+  padding: 3px;
+}
+
+.info span {
+  display: block;
+  border-bottom: 2px solid darkslategray;
+  margin: 0 8px 0;
+  padding-bottom: 5px;
+}
+
+.info span:last-child {
+  border-bottom: none;
+}
+
+.stats {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: stats;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-gap: 2px;
+}
+
+.counters {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 2;
+  grid-area: counters;
+  padding: 10px;
+}
+
+.counters .counter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-size: 16px;
+  height: 50%;
+  padding: 5px;
+}
+
+.counters .counter__item {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding: 2px;
+}
+
+.counters .counter--title {
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+}
+
+.armor {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: armor;
+}
+
+.advantages {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 4;
+  -ms-grid-column: 2;
+  grid-area: advantages;
+}
+
+.disadvantages {
+  grid-area: disadvantages;
+}
+
+.mainHand {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 3;
+  grid-area: mainHand;
+}
+
+.offHand {
+  -ms-grid-row: 5;
+  -ms-grid-column: 3;
+  grid-area: offHand;
+}
+
+.buffs {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 4;
+  grid-area: buffs;
+}
+
+.actions {
+  grid-area: actions;
+}
+
+.inventory {
+  -ms-grid-row: 4;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 4;
+  grid-area: inventory;
+}
