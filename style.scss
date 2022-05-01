@@ -7,7 +7,7 @@ body{
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.5
 
 }
 
@@ -21,6 +21,13 @@ h1,h2,h3,h4,h6,p {
 $mainPad: 4vh;
 $a4: 297/210;
 $size:100vh ;
+$cardScale: 68/45;
+$cardHeight:45/210*($size - 2* $mainPad);
+$gexA: 1.7305/2;
+$gexhight: 20/210*100vh;
+$roundHeight: 10/210*100vh;
+
+
 
 // Header
 
@@ -43,21 +50,22 @@ header{
     margin: 0 auto;
     padding: $mainPad 0;
 }
+$blockForCardHeight: $cardHeight*1.05;
 .wrapper{
     display:grid;
     height: 100%;
     width:100%;
-    grid-template-columns: 1fr 1fr  1.4fr 2fr;
-    grid-template-rows: 1.4fr 1.4fr 0.5fr  0.5fr 1fr;
+    grid-template-columns: 1fr 3*$roundHeight+8vh $cardScale*$cardHeight+2vh 1fr;
+    grid-template-rows: $gexhight+2vh 2*$gexhight+4vh $blockForCardHeight 1fr;
 
 
-    grid-gap: 5px 5px;
+
     grid-template-areas:
-        'info stats      counters       counters '
-        'info advantages armor         buffs   '
-        'info advantages mainHand         buffs    '
-        'info advantages mainHand         inventory    '
-        'info advantages offHand         inventory    ';
+        'info stats  buffs      buffs        buffs '
+        'info stats  counters   counters     counters '
+        'info stats  mainHand   armor        offHand   '
+        'info traits inventory  inventory    inventory    '
+        ;
 
     .grid__cell{
         border: 1px dashed black;
@@ -66,14 +74,17 @@ header{
 
 .info{
     grid-area: info;
+    padding: 0 5px;
     .img__box{
 
-        max-width: 200px;
+        margin: 0 auto;
         padding: 5px 10px 5px;
     }
     img{
+
+        max-height: 200px;
         object-fit: contain;
-        width:100%;
+        height:100%;
     }
     .name{
         text-align: center;
@@ -88,41 +99,83 @@ header{
         border-bottom: none;
     }
     }
+    .skills{
+        margin-top: 5px;
+        border: 1px dashed black;
+
+        .skill{
+            display:flex;
+            justify-content: space-between;
+            height: 24px;
+            .skill__value {
+                height:100%;
+                width:100px;
+                border: 1px solid blue;
+            }
+        }
+
+    }
 
 }
 .stats{
     grid-area: stats;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-gap: 2px;
-    .stat{
 
-    }
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
 
 
 }
+.stats--weapon{
+    grid-template-rows: 1fr 1fr 1fr;
+
+}
+.stat{
+   height: $roundHeight+1vh;
+   display: flex;
+   flex-direction: row;
+
+   &__item{
+       height: 100%;
+       width: $roundHeight+1vh;
+   }
+}
 .counters{
     grid-area: counters;
-    padding: 10px;
+    padding: 5px;
+
 
     .counter{
 
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 2fr 4fr;
+        grid-template-rows: 1fr 1fr;
         width:100%;
-        justify-content: flex-start;
-        font-size: 16px;
+
+
 
         height: 50%;
         padding:5px;
 
         &__item{
-            flex-grow: 1;
+
             padding:2px;
         }
-        &--title{
-            flex-grow: 0;
+        &__item:nth-child(1){
+            grid-row: 1 /2;
+        }
+        &__item:nth-child(2){
+            grid-row: 2 /3;
+        }
+        &__item:nth-child(3){
+            grid-row: 1 /2;
+        }
+        &__item:nth-child(4){
+            grid-row: 1 /3;
+        }
+        &__item:nth-child(6){
+            grid-column: 4 /5;
         }
     }
 
@@ -130,24 +183,62 @@ header{
 .armor{
     grid-area: armor;
 }
-.advantages{
-    grid-area: advantages;
+.traits{
+    grid-area: traits;
+    padding: 5px;
+
 }
-.disadvantages{
-    grid-area: disadvantages;
+.item{
+    line-height: 1.3;
+    padding: 2px;
+    padding-bottom: 0;
+    border-bottom: 1px solid darkslategray;
 }
 .mainHand{
     grid-area: mainHand;
+    display: flex;
+
 }
 .offHand{
     grid-area: offHand;
 }
 .buffs{
     grid-area: buffs;
+    display: flex;
+    flex-direction: roW;
 }
 .actions{
     grid-area: actions;
 }
 .inventory{
     grid-area: inventory;
+    padding: 5px;
+}
+.blank{
+    grid-area: blank;
+}
+.card {
+    width: $cardScale*$cardHeight;
+    height: $cardHeight;
+    &--reversed{
+
+    }
+}
+
+
+
+
+.hexagon {
+    background-color: red;
+    margin: 0 2px;
+    height: $gexhight;
+    width: $gexhight;
+    clip-path: polygon(25% 50%*(1-$gexA),75% 50%*(1-$gexA), 100% 50%, 75% (1+$gexA)*50%, 25% (1+$gexA)*50%, 0% 50%)
+}
+.circle{
+    background-color: blue;
+    margin: 2px 2px;
+    height: $roundHeight;
+    width: $roundHeight;
+    border-radius: 50%;
 }

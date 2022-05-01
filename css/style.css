@@ -40,12 +40,11 @@ header {
   display: grid;
   height: 100%;
   width: 100%;
-  -ms-grid-columns: 1fr 1fr  1.4fr 2fr;
-      grid-template-columns: 1fr 1fr  1.4fr 2fr;
-  -ms-grid-rows: 1.4fr 1.4fr 0.5fr  0.5fr 1fr;
-      grid-template-rows: 1.4fr 1.4fr 0.5fr  0.5fr 1fr;
-  grid-gap: 5px 5px;
-      grid-template-areas: 'info stats      counters       counters ' 'info advantages armor         buffs   ' 'info advantages mainHand         buffs    ' 'info advantages mainHand         inventory    ' 'info advantages offHand         inventory    ';
+  -ms-grid-columns: 1fr 22.28571vh 31.79048vh 1fr;
+      grid-template-columns: 1fr 22.28571vh 31.79048vh 1fr;
+  -ms-grid-rows: 11.52381vh 23.04762vh 20.7vh 1fr;
+      grid-template-rows: 11.52381vh 23.04762vh 20.7vh 1fr;
+      grid-template-areas: 'info stats  buffs      buffs        buffs ' 'info stats  counters   counters     counters ' 'info stats  mainHand   armor        offHand   ' 'info traits inventory  inventory    inventory    ';
 }
 
 .wrapper .grid__cell {
@@ -54,20 +53,22 @@ header {
 
 .info {
   -ms-grid-row: 1;
-  -ms-grid-row-span: 5;
+  -ms-grid-row-span: 4;
   -ms-grid-column: 1;
   grid-area: info;
+  padding: 0 5px;
 }
 
 .info .img__box {
-  max-width: 200px;
+  margin: 0 auto;
   padding: 5px 10px 5px;
 }
 
 .info img {
+  max-height: 200px;
   -o-object-fit: contain;
      object-fit: contain;
-  width: 100%;
+  height: 100%;
 }
 
 .info .name {
@@ -86,28 +87,47 @@ header {
   border-bottom: none;
 }
 
+.info .skills {
+  margin-top: 5px;
+  border: 1px dashed black;
+}
+
+.info .skills .skill {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 24px;
+}
+
+.info .skills .skill .skill__value {
+  height: 100%;
+  width: 100px;
+  border: 1px solid blue;
+}
+
 .stats {
   -ms-grid-row: 1;
+  -ms-grid-row-span: 3;
   -ms-grid-column: 2;
   grid-area: stats;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-  -ms-grid-rows: 1fr 1fr 1fr 1fr;
-      grid-template-rows: 1fr 1fr 1fr 1fr;
-  grid-gap: 2px;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-.counters {
-  -ms-grid-row: 1;
-  -ms-grid-column: 3;
-  -ms-grid-column-span: 2;
-  grid-area: counters;
-  padding: 10px;
+.stats--weapon {
+  -ms-grid-rows: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
 }
 
-.counters .counter {
+.stat {
+  height: 5.7619vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -115,63 +135,114 @@ header {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+}
+
+.stat__item {
+  height: 100%;
+  width: 5.7619vh;
+}
+
+.counters {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+  grid-area: counters;
+  padding: 5px;
+}
+
+.counters .counter {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 0.5fr 1fr 2fr 4fr;
+      grid-template-columns: 0.5fr 1fr 2fr 4fr;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
   width: 100%;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  font-size: 16px;
   height: 50%;
   padding: 5px;
 }
 
 .counters .counter__item {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
   padding: 2px;
 }
 
-.counters .counter--title {
-  -webkit-box-flex: 0;
-      -ms-flex-positive: 0;
-          flex-grow: 0;
+.counters .counter__item:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1 /2;
+}
+
+.counters .counter__item:nth-child(2) {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 1;
+  grid-row: 2 /3;
+}
+
+.counters .counter__item:nth-child(3) {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  grid-row: 1 /2;
+}
+
+.counters .counter__item:nth-child(4) {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1 /3;
+}
+
+.counters .counter__item:nth-child(6) {
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 1;
+  grid-column: 4 /5;
 }
 
 .armor {
-  -ms-grid-row: 2;
-  -ms-grid-column: 3;
+  -ms-grid-row: 3;
+  -ms-grid-column: 4;
   grid-area: armor;
 }
 
-.advantages {
-  -ms-grid-row: 2;
-  -ms-grid-row-span: 4;
+.traits {
+  -ms-grid-row: 4;
   -ms-grid-column: 2;
-  grid-area: advantages;
+  grid-area: traits;
+  padding: 5px;
 }
 
-.disadvantages {
-  grid-area: disadvantages;
+.item {
+  line-height: 1.3;
+  padding: 2px;
+  padding-bottom: 0;
+  border-bottom: 1px solid darkslategray;
 }
 
 .mainHand {
   -ms-grid-row: 3;
-  -ms-grid-row-span: 2;
   -ms-grid-column: 3;
   grid-area: mainHand;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .offHand {
-  -ms-grid-row: 5;
-  -ms-grid-column: 3;
+  -ms-grid-row: 3;
+  -ms-grid-column: 5;
   grid-area: offHand;
 }
 
 .buffs {
-  -ms-grid-row: 2;
-  -ms-grid-row-span: 2;
-  -ms-grid-column: 4;
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
   grid-area: buffs;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: roW;
+          flex-direction: roW;
 }
 
 .actions {
@@ -180,7 +251,34 @@ header {
 
 .inventory {
   -ms-grid-row: 4;
-  -ms-grid-row-span: 2;
-  -ms-grid-column: 4;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
   grid-area: inventory;
+  padding: 5px;
+}
+
+.blank {
+  grid-area: blank;
+}
+
+.card {
+  width: 29.79048vh;
+  height: 19.71429vh;
+}
+
+.hexagon {
+  background-color: red;
+  margin: 0 2px;
+  height: 9.52381vh;
+  width: 9.52381vh;
+  -webkit-clip-path: polygon(25% 6.7375%, 75% 6.7375%, 100% 50%, 75% 93.2625%, 25% 93.2625%, 0% 50%);
+          clip-path: polygon(25% 6.7375%, 75% 6.7375%, 100% 50%, 75% 93.2625%, 25% 93.2625%, 0% 50%);
+}
+
+.circle {
+  background-color: blue;
+  margin: 2px 2px;
+  height: 4.7619vh;
+  width: 4.7619vh;
+  border-radius: 50%;
 }
