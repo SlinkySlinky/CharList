@@ -26,8 +26,11 @@ $cardHeight:45/210*($size - 2* $mainPad);
 $gexA: 1.7305/2;
 $gexhight: 20/210*100vh;
 $roundHeight: 10/210*100vh;
-
-
+$decHight: 22/210*100vh;
+$statSize: 10/210*100vh;
+$statSizeBox: $statSize +1vh;
+$squerSize: 15/210*100vh;
+$cardWidth: $cardHeight *$cardScale;
 
 // Header
 
@@ -55,8 +58,8 @@ $blockForCardHeight: $cardHeight*1.05;
     display:grid;
     height: 100%;
     width:100%;
-    grid-template-columns: 1fr 3*$roundHeight+8vh $cardScale*$cardHeight+2vh 1fr;
-    grid-template-rows: $gexhight+2vh 2*$gexhight+4vh $blockForCardHeight 1fr;
+    grid-template-columns: 1fr 5*$statSize+2vh $cardWidth+1vh $cardWidth+1vh $cardWidth+1vh;
+    grid-template-rows: 1*$squerSize+2vh 4*$statSize+2vh $blockForCardHeight/2 $blockForCardHeight/2 1fr;
 
 
 
@@ -64,7 +67,8 @@ $blockForCardHeight: $cardHeight*1.05;
         'info stats  buffs      buffs        buffs '
         'info stats  counters   counters     counters '
         'info stats  mainHand   armor        offHand   '
-        'info traits inventory  inventory    inventory    '
+        'info skills mainHand   armor        offHand   '
+        'info skills traits     inventory    inventory    '
         ;
 
     .grid__cell{
@@ -99,93 +103,127 @@ $blockForCardHeight: $cardHeight*1.05;
         border-bottom: none;
     }
     }
-    .skills{
-        margin-top: 5px;
-        border: 1px dashed black;
 
-        .skill{
-            display:flex;
-            justify-content: space-between;
-            height: 24px;
-            .skill__value {
-                height:100%;
-                width:100px;
-                border: 1px solid blue;
-            }
-        }
 
-    }
 
 }
 .stats{
     grid-area: stats;
     display: grid;
+$statRowSize: 1/6*100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: $statRowSize;
+    padding: 0.5vh;
 
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-
-
-
-}
-.stats--weapon{
-    grid-template-rows: 1fr 1fr 1fr;
 
 }
+
 .stat{
-   height: $roundHeight+1vh;
+
    display: flex;
    flex-direction: row;
-
+    padding: auto;
+    align-items: center;
+    justify-content: center;
    &__item{
-       height: 100%;
-       width: $roundHeight+1vh;
+
+       height: $statSizeBox;
+       width: $statSizeBox;
+        text-align: center;
+        font-size: 18px;
+        line-height: $statSizeBox;
+       img{
+           height: 70%;
+           margin: 15% 15%;
+
+       }
    }
+
+   .slash{
+       height: 50%;
+       width: 2px;
+       background-color: grey;
+   }
+
+
+}
+.stat:nth-child(7),
+.stat:nth-child(8),
+.stat:nth-child(9){
+    grid-column: 1 /3
 }
 .counters{
     grid-area: counters;
-    padding: 5px;
-
+    padding: 0;
+    img{
+        margin: auto;
+        height: 85%;
+    }
 
     .counter{
 
         display: grid;
-        grid-template-columns: 0.5fr 1fr 2fr 4fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 2*$statSize 1fr 4fr;
+        grid-template-rows: $statSize $statSize;
         width:100%;
-
+        padding: 0.5vh;
 
 
         height: 50%;
-        padding:5px;
+
 
         &__item{
-
-            padding:2px;
+            display: flex;
+            flex-direction: row;
+            padding: auto;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            span{
+                width: $statSize;
+            }
         }
+
         &__item:nth-child(1){
             grid-row: 1 /2;
         }
         &__item:nth-child(2){
-            grid-row: 2 /3;
+            grid-row:2 /3;
         }
         &__item:nth-child(3){
-            grid-row: 1 /2;
+            grid-row: 1 /3;
         }
         &__item:nth-child(4){
             grid-row: 1 /3;
         }
-        &__item:nth-child(6){
-            grid-column: 4 /5;
+
+
+    }
+
+}
+.skills{
+    grid-area: skills;
+    margin-top: 5px;
+    border: 1px dashed black;
+    padding: 0.5vh;
+    .skill{
+        display:flex;
+        justify-content: space-between;
+        height: 24px;
+        .skill__value {
+            height:100%;
+            width:100px;
+            border: 1px solid blue;
         }
     }
 
 }
-.armor{
-    grid-area: armor;
-}
+
+
+
 .traits{
     grid-area: traits;
-    padding: 5px;
+    padding: 0.5vh;
 
 }
 .item{
@@ -196,16 +234,21 @@ $blockForCardHeight: $cardHeight*1.05;
 }
 .mainHand{
     grid-area: mainHand;
-    display: flex;
-
+    padding: 0.5vh;
 }
 .offHand{
     grid-area: offHand;
+    padding: 0.5vh;
+}
+.armor{
+    grid-area: armor;
+    padding: 0.5vh;
 }
 .buffs{
     grid-area: buffs;
     display: flex;
     flex-direction: roW;
+    padding: 0.5vh;
 }
 .actions{
     grid-area: actions;
@@ -233,7 +276,12 @@ $blockForCardHeight: $cardHeight*1.05;
     margin: 0 2px;
     height: $gexhight;
     width: $gexhight;
-    clip-path: polygon(25% 50%*(1-$gexA),75% 50%*(1-$gexA), 100% 50%, 75% (1+$gexA)*50%, 25% (1+$gexA)*50%, 0% 50%)
+    clip-path: polygon(25% 50%*(1-$gexA),75% 50%*(1-$gexA), 100% 50%, 75% (1+$gexA)*50%, 25% (1+$gexA)*50%, 0% 50%);
+
+    img{
+        width: 60%;
+
+    }
 }
 .circle{
     background-color: blue;
@@ -241,4 +289,32 @@ $blockForCardHeight: $cardHeight*1.05;
     height: $roundHeight;
     width: $roundHeight;
     border-radius: 50%;
+}
+$a: 9.76%;
+$b: 30%;
+$r: 50%*0.049;
+$side: 31.6%;
+.decagon {
+    background-color: green;
+    height: $decHight;
+    width: $decHight;
+    clip-path: polygon(
+        0 50%,
+        $a 50% - $b,
+        50% - $side /2 $r,
+        50% + $side /2 $r,
+        100% - $a 50% - $b,
+        100% 50%,
+        100% - $a 50% + $b,
+        50% + $side/2 100% - $r,
+        50% - $side /2  100% - $r,
+        $a 50% + $b,
+        );
+}
+.squer{
+    background-color: purple;
+    height: $squerSize;
+    width: $squerSize;
+    margin: 4px;
+
 }
