@@ -6,7 +6,7 @@ body{
 
     margin: 0;
     font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
+    font-size: 1.6vh;
     line-height: 1.5
 
 }
@@ -15,7 +15,20 @@ body{
 h1,h2,h3,h4,h6,p {
     margin: 0;
 }
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    line-height: 1.6;
+    li{
+        border-bottom: 1px solid black;
+        display: flex;
+        justify-content: space-between;
 
+    }
+}
 // Variables
 
 $mainPad: 4vh;
@@ -25,13 +38,13 @@ $cardScale: 68/45;
 $cardHeight:45/210*($size - 2* $mainPad);
 $gexA: 1.7305/2;
 $gexhight: 20/210*100vh;
-$roundHeight: 10/210*100vh;
+$roundHeight: 3/210*100vh;
 $decHight: 22/210*100vh;
-$statSize: 10/210*100vh;
+$statSize: 14/210*100vh;
 $statSizeBox: $statSize +1vh;
 $squerSize: 15/210*100vh;
 $cardWidth: $cardHeight *$cardScale;
-
+$circleSize: 1.3vh;
 // Header
 
 header{
@@ -45,6 +58,7 @@ header{
 }
 
 // Main Content
+
 .main-content{
 
 
@@ -58,23 +72,28 @@ $blockForCardHeight: $cardHeight*1.05;
     display:grid;
     height: 100%;
     width:100%;
-    grid-template-columns: 1fr 5*$statSize+2vh $cardWidth+1vh $cardWidth+1vh $cardWidth+1vh;
-    grid-template-rows: 1*$squerSize+2vh 4*$statSize+2vh $blockForCardHeight/2 $blockForCardHeight/2 1fr;
+    grid-template-columns: 22% 20% 20% 20%;
+    grid-template-rows: 35% 20% 45%;
 
 
 
     grid-template-areas:
-        'info stats  buffs      buffs        buffs '
-        'info stats  counters   counters     counters '
-        'info stats  mainHand   armor        offHand   '
-        'info skills mainHand   armor        offHand   '
-        'info skills traits     inventory    inventory    '
+
+        'info      stats  counter   buffs      buffs  '
+        'info      skills  abilities   inventory        inventory   '
+        'traits      skills  abilities      inventory    inventory    '
         ;
 
     .grid__cell{
         border: 1px dashed black;
     }
 }
+h3{
+    margin-bottom: 0.5vh;
+    line-height: 1.3;
+}
+
+// Info
 
 .info{
     grid-area: info;
@@ -93,6 +112,7 @@ $blockForCardHeight: $cardHeight*1.05;
     .name{
         text-align: center;
         padding: 3px;
+        font-size: 2vh;
     }
     span{
         display: block;
@@ -103,135 +123,253 @@ $blockForCardHeight: $cardHeight*1.05;
         border-bottom: none;
     }
     }
-
-
-
-}
-.stats{
-    grid-area: stats;
-    display: grid;
-$statRowSize: 1/6*100%;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: $statRowSize;
-    padding: 0.5vh;
-
-
-}
-
-.stat{
-
-   display: flex;
-   flex-direction: row;
-    padding: auto;
-    align-items: center;
-    justify-content: center;
-   &__item{
-
-       height: $statSizeBox;
-       width: $statSizeBox;
-        text-align: center;
-        font-size: 18px;
-        line-height: $statSizeBox;
-       img{
-           height: 70%;
-           margin: 15% 15%;
-
-       }
-   }
-
-   .slash{
-       height: 50%;
-       width: 2px;
-       background-color: grey;
-   }
-
-
-}
-.stat:nth-child(7),
-.stat:nth-child(8),
-.stat:nth-child(9){
-    grid-column: 1 /3
-}
-.counters{
-    grid-area: counters;
-    padding: 0;
-    img{
-        margin: auto;
-        height: 85%;
+    ul{
+        padding:0.5vh;
     }
 
-    .counter{
 
-        display: grid;
-        grid-template-columns: 2*$statSize 1fr 4fr;
-        grid-template-rows: $statSize $statSize;
-        width:100%;
-        padding: 0.5vh;
+}
+
+// Abilities
+
+.abilities{
+    grid-area: abilities;
+    padding: 1vh;
+    img {
+        width: $statSize*0.5;
+
+    }
+    .weapon-values{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 5px;
+    }
+    .weapon-values::before{
+        content: '';
+        position: absolute;
+        width: 1px;
+        height: 80%;
+        top: 10%;
+        left: 50%;
+        border-left: 1px solid black;
+    }
+
+    .value{
+        padding: 5px;
+        float:left;
+    }
+    h4{
+        display: inline-block;
+        padding: 0 5px;
+    }
+    .weapon-values__item:nth-child(2){
+        text-align: end;
+        .value{
+            float:right;
+        }
+
+    }
+
+}
+
+// Stats
+
+.stats{
+    grid-area: stats;
 
 
-        height: 50%;
-
-
+    padding: 0.5vh;
+    .stat{
+        height: 25%;
+        display: flex;
+        flex-direction: row;
+         padding: auto;
+         align-items: center;
+         justify-content: center;
         &__item{
-            display: flex;
-            flex-direction: row;
-            padding: auto;
-            text-align: center;
-            align-items: center;
-            justify-content: center;
-            span{
-                width: $statSize;
+
+            height: $statSizeBox;
+            width: $statSizeBox;
+             text-align: center;
+             font-size: 2vh;
+             line-height: $statSizeBox;
+            img{
+                height: 70%;
+                margin: 15% 15%;
+
             }
         }
 
-        &__item:nth-child(1){
-            grid-row: 1 /2;
-        }
-        &__item:nth-child(2){
-            grid-row:2 /3;
-        }
-        &__item:nth-child(3){
-            grid-row: 1 /3;
-        }
-        &__item:nth-child(4){
-            grid-row: 1 /3;
+        .stat__buff {
+            margin: 0 5%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: $statSize*0.33;
+            justify-content: center;
+
+            img{
+                width: 100%;
+                margin-bottom: 3px;
+            }
+            .circle{
+                margin: 5px auto;
+                border-radius: 50%;
+            }
         }
 
 
-    }
+     }
 
 }
+
+// Skills
+
 .skills{
     grid-area: skills;
     margin-top: 5px;
     border: 1px dashed black;
-    padding: 0.5vh;
+    padding: 1vh;
     .skill{
         display:flex;
         justify-content: space-between;
-        height: 24px;
+        align-items: center;
+        height: 2.8vh;
         .skill__value {
+            position: relative;
             height:100%;
-            width:100px;
-            border: 1px solid blue;
+            width:45%;
+            display:flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            .circle{
+
+                height: $roundHeight;
+                width: $roundHeight;
+                border-radius: 50%;
+                border: 1px solid black;
+                margin: auto;
+                background-color: white;
+                z-index: 3;
+            }
+        }
+        .skill__value::after{
+            content:'';
+            position: absolute;
+            top: 50%;
+            left:10%;
+            width: 80%;
+            height: 1px;
+            background-color: black;
+            z-index: 2;
         }
     }
 
 }
 
+// Buffs
 
-
-.traits{
-    grid-area: traits;
+.buffs{
+    grid-area: buffs;
+    display: flex;
+    flex-direction: roW;
     padding: 0.5vh;
 
+    justify-content: flex-end;
+    padding: 0.5vh;
+    align-items: center;
+    .squer:last-child{
+        margin-right: 1vh;
+    }
 }
-.item{
-    line-height: 1.3;
-    padding: 2px;
-    padding-bottom: 0;
-    border-bottom: 1px solid darkslategray;
+
+// Counters
+.number-box{
+    width:$statSize*0.4;
+    height: $statSize*0.4;
+    border-bottom: 1px solid black;
+    text-align: center;
+    margin-bottom: 2px;
 }
+.counters{
+    position:relative;
+    grid-area: counter;
+    height: 100%;
+    padding: 0.5vh;
+
+    .counter{
+        height: 50%;
+        display:flex;
+        flex-direction: row;
+        .counter__item{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        }
+        img {
+            width: $statSize*0.8;
+        }
+        .counter__item:nth-child(1){
+            width: 6vh;
+            .value__item{
+                width: 5vh;
+            }
+            .number-box{
+                margin-bottom: 5px;
+            }
+        }
+        .counter__item:nth-child(2) {
+            margin-left: $statSize*0.5;
+            img{
+                width: $statSize*0.3;
+                position: absolute;
+                left:- $statSize*0.4;
+            }
+            .value{
+
+                .value__item{
+                    left: 0;
+                    margin: $circleSize*1 0;
+                    width: $circleSize* 10;
+                    .circle {
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+        .counter__item:nth-child(3){
+
+            width: $statSize;
+
+            position: absolute;
+            right: - $statSize/2;
+            top:65/604*100%;
+
+
+            background-color: white;
+            border: 1px dashed black;
+            img{
+                width:$statSize*0.5;
+            }
+            .value{
+                padding: 2px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    }
+
+
+
+// Staff
+
 .mainHand{
     grid-area: mainHand;
     padding: 0.5vh;
@@ -244,31 +382,155 @@ $statRowSize: 1/6*100%;
     grid-area: armor;
     padding: 0.5vh;
 }
-.buffs{
-    grid-area: buffs;
-    display: flex;
-    flex-direction: roW;
-    padding: 0.5vh;
+
+// Traits
+
+.traits{
+    grid-area: traits;
+    padding: 1vh;
+  h4 {
+      display: inline-block;
+      padding-right: 5px;
+  }
+  span {
+      display: inline-block;
+      border-bottom: 1px solid black;
+      margin-left: 2px;
+      width: 80%;
+  }
+
 }
-.actions{
-    grid-area: actions;
-}
+
+// Inventory
+
 .inventory{
     grid-area: inventory;
-    padding: 5px;
+    padding: 1vh;
+    .inventory__line {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        h3{
+            margin-bottom: 0;
+        }
+        img{
+            width:$statSize*0.7;
+            padding: 5px;
+        }
+        .number-box:last-child{
+            width: $statSize*1.2;
+        }
+
+
+    }
+
+
+    .inventory__box{
+        position: relative;
+        display:flex;
+        width: 100%;
+        ul{
+            width:50%;
+            padding-right:1vh;
+        }
+        ul:last-child{
+            padding-right: 0;
+            padding-left: 1vh;
+
+        }
+    }
+    .inventory__box::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 1px;
+        height: 100%;
+        background-color: black;
+    }
+
 }
-.blank{
-    grid-area: blank;
-}
+
+
+// Elements
+
+
 .card {
     width: $cardScale*$cardHeight;
     height: $cardHeight;
+    display:grid;
     &--reversed{
 
     }
 }
+.weapon {
+    grid-template-areas:
+        'cost name   hands'
+        'about about about'
+        'dmg  dmg  dmg'
+        'bar  bar    bar'
+    ;
+    padding: 0.5vh;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: 1fr 4fr 1fr 1fr;
+}
+.cost{
+    grid-area: cost;
+}
+.name{
+    grid-area: name;
+}
+.hands{
+    grid-area: hands;
+}
 
+.about{
+    grid-area: about;
+    .card-icon{
+        height: 8vh;
+        img{
+            height: 100%;
+            object-fit: contain;
+        }
+    }
 
+}
+.dmg{
+    grid-area: dmg;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    .dmg__item {
+        display:flex;
+
+        width:50%;
+        justify-content: center;
+        align-items: center;
+        img{
+
+            object-fit: contain;
+            height: 3.5vh;
+            width: 3.5vh;
+        }
+        .card-number{
+            text-align: center;
+            line-height: 100%;
+            height: 3.5vh;
+            width: 3.5vh;
+        }
+}
+
+}
+.bar{
+    grid-area: bar;
+    display: flex;
+    flex-direction: row;
+    height: 3vh;
+    .bar__item {
+        flex-grow: 1;
+        border: 1px dashed red;
+    }
+}
 
 
 .hexagon {
@@ -283,13 +545,7 @@ $statRowSize: 1/6*100%;
 
     }
 }
-.circle{
-    background-color: blue;
-    margin: 2px 2px;
-    height: $roundHeight;
-    width: $roundHeight;
-    border-radius: 50%;
-}
+
 $a: 9.76%;
 $b: 30%;
 $r: 50%*0.049;
@@ -312,9 +568,44 @@ $side: 31.6%;
         );
 }
 .squer{
-    background-color: purple;
+
     height: $squerSize;
     width: $squerSize;
-    margin: 4px;
+    margin: 0 0.5vh;
+    border: 1px solid purple;
+}
+
+
+.value__item{
+    position: relative;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 3*$circleSize + 0.5vh;
+    margin: 2px 0;
+
+
+}
+.circle{
+    display: block;
+    height: $circleSize;
+    width: $circleSize;
+    border: 1px solid black;
+    border-radius: 30%;
+
+    background-color: white;
+    z-index: 4;
+};
+.value__item::after {
+    content: '';
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    left: 5%;
+    width: 90%;
+    height: 1px;
+    background-color: black;
+    z-index:3;
 
 }
